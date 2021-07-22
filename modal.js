@@ -86,22 +86,27 @@ formValidator.addEventListener("submit", function(e) {
 
 //validation villes - required sur le html fait tout péter :(
 
-//let inputRadioRequired = document.getElementById("location");
+let inputRadioRequired = document.getElementById("location");
 //inputRadioRequired.setAttribute("required", "");
 //inputRadioRequired.required = true;
 
-let inputRadioRequired = document.getElementById("location");
-document.getElementById("location").required
-document.getElementById("location").getAttribute("required");
-
+//let inputRadioRequired = document.getElementById("location");
 
 let missingRadioButtonChecked = document.getElementById("radioButtonValidationField");
-formValidator.addEventListener("submit", function(e) {
-    if (inputRadioRequired.value == "") {
-        missingRadioButtonChecked.innerHTML = "Vous devez sélectionner au moins une ville."
-        e.preventDefault();
-    }
-});
+//formValidator.addEventListener("submit", function(e) {
+//    if (!inputRadioRequired.checked) {
+//        missingRadioButtonChecked.innerHTML = "Vous devez sélectionner au moins une ville."
+//        e.preventDefault();
+//    }
+//});
+
+//form.location.addEventListener("change", function() {
+//   inputChecked(this);
+//});
+
+//const inputChecked = function(inputChecking) {
+//    let
+//}
 
 // quand l'utilisateur change de champ de saisie, js écoute l'autre champ texte
 
@@ -141,3 +146,44 @@ emailInput.onchange = function(e) {
     });
     missingEmailInput.innerHTML = "";
 };
+
+quantityInput.onchange = function(e) {
+    formValidator.addEventListener("submit", function(e) {
+        if (quantityInput.value == "") {
+            missingQuantityInput.innerHTML = "Vous devez saisir un nombre."
+            e.preventDefault();
+        }
+    });
+    missingQuantityInput.innerHTML = "";
+};
+
+// message quand le formulaire est ok > "alert formulaire envoyé"
+
+// ajouter un if "tout est n'est pas ok"
+// il ignore le input ville????!! WTF ?!!!
+
+document.getElementById("reserve").addEventListener("submit", function(e) {
+    let error;
+    let globalVerification = document.getElementsByTagName("input");
+    // un try / catch ou quoi? 
+    e.preventDefault();
+
+    for (var i = 0; i < globalVerification.length; i++) {
+        if (!globalVerification[i].value) {
+            error = "Merci de saisir toutes les informations demandées.";
+            error = true;
+            e.preventDefault();
+        }
+    }
+
+    if (error == true) {
+        alert("Merci de vérifier les informations saisies.");
+        return false;
+        e.preventDefault();
+    } else {
+        alert("Merci! Votre réservation a été reçue.");
+        modalbg.style.display = "none";
+        return false;
+    }
+
+});
