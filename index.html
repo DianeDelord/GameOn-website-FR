@@ -47,39 +47,40 @@
             <div class="content">
                 <span class="close"></span>
                 <div class="modal-body">
-                    <form id="reserve" name="reserve" action="index.html" method="POST">
+                    <form id="reserve" name="reserve" action="index.html" method="POST" onsubmit="return validate()">
                         <!-- prénom -->
                         <div class="formData">
                             <label for="first">Prénom</label><br>
                             <input class="text-control" type="text" id="first" name="first" /><br>
-                            <p id="validationFieldFirst"></p>
+                            <small id="validationFieldFirst"></small>
                         </div>
 
                         <!-- nom -->
                         <div class="formData">
                             <label for="last">Nom</label><br>
                             <input class="text-control" type="text" id="last" name="last" /><br>
-                            <p id="validationFieldSecond"></p>
+                            <small id="validationFieldSecond"></small>
                         </div>
 
                         <!-- email -->
                         <div class="formData">
                             <label for="email">E-mail</label><br>
                             <input class="text-control" type="text" id="email" name="email" /><br>
-                            <p id="emailValidationField"></p>
+                            <small id="emailValidationField"></small>
                         </div>
 
                         <!-- date de naissance -->
                         <div class="formData">
                             <label for="birthdate">Date de naissance</label><br>
-                            <input class="text-control" type="date" id="birthdate" name="birthdate" /><br>
+                            <input class="text-control" type="text" id="birthdate" name="birthdate" /><br>
+                            <small id="birthdateValidationField"></small>
                         </div>
 
                         <!-- nombre de tournois -->
                         <div class="formData">
                             <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                            <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99"><br>
-                            <p id="quantityValidationField"></p>
+                            <input type="text" class="text-control" id="quantity" name="quantity"><br>
+                            <small id="quantityValidationField"></small>
                         </div>
 
                         <!-- villes -->
@@ -112,7 +113,7 @@
                       <label class="checkbox-label" for="location6">
                         <span class="checkbox-icon"></span>
                         Portland</label >
-                        <p id="radioButtonValidationField"></p>
+                        <small id="radioButtonValidationField"></small>
                       </div>
 
 
@@ -120,10 +121,11 @@
                       <div class="formData">
                         <input class="checkbox-input" type="checkbox"
                           id="checkbox1" checked />
-                        <label class="checkbox2-label" for="checkbox1" required>
+                        <label class="checkbox2-label" for="checkbox1" >
                           <span class="checkbox-icon"></span>
                           J'ai lu et accepté les conditions d'utilisation.
                         </label>
+                            <small id="conditionsValidationField"></small>
                             <br>
                             <input class="checkbox-input" type="checkbox" id="checkbox2" />
                             <label class="checkbox2-label" for="checkbox2">
