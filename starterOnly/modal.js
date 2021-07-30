@@ -53,6 +53,11 @@ let missingQuantityInput = document.getElementById("quantityValidationField"); /
 let missingRadioButtonChecked = document.getElementById("radioButtonValidationField"); //radio button ville
 let missingConditions = document.getElementById("conditionsValidationField"); //conditions d'utilisation
 
+// modale quand tout est ok - inscription validée!
+let closeForm = document.getElementsByClassName("modal-body");
+let validationMessage = document.getElementById("modal-body__validation");
+validationMessage.style.display = "none";
+
 // validation des champs grâce à des regEx
 let verifyTextInput = /^[a-zA-Z-\s]{2,}$/;
 let verifyEmailInput = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -135,6 +140,7 @@ quantityInput.onchange = function(e) {
 };
 
 //ville
+// vidéos qui m'a permis de trouver la solution!! https://www.youtube.com/watch?v=tWJxQqMYJJE
 let cityValidated = false;
 let radios = document.getElementsByName("location");
 radios.forEach(radio => {
@@ -165,16 +171,30 @@ conditions.onchange = function(e) {
     }
 };
 
+// validation du formulaire au click sur bouton submit
 formValidator.addEventListener("submit", function(e) {
     e.preventDefault();
 
     if (firstInputValidated && secondInputValidated && emailInputValidated &&
         birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
-        alert("merci, votre réservation a été reçue!");
+        formValidator.style.display = "none";
+        validationMessage.style.display = "block";
+        validationMessage.addEventListener("click", closeWindow);
+        formValidator.submit();
+        closeForm[0].style.display = "none";
         modalbg.style.display = "none";
-        document.reserve.submit();
+
     } else {
-        alert("merci de vérifier les informations saisies!");
+        //alert("merci de vérifier les informations saisies!");
+        //formValidator.style.display = "none";
+        //modalbg.style.display = "none";
+        validationMessage.textContent = 'Merci de vérifier les informations saisies!';
+        validationMessage.style.display = "block";
+        //validationMessage.closest();
+        //formValidator.style.display = "block";
+        //validationMessage.style.display = "none";
+
+        //closeForm[0].addEventListener("click", launchModal);
     }
 
     console.log(firstInputValidated, secondInputValidated, emailInputValidated,

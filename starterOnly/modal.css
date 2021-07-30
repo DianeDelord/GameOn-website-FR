@@ -193,7 +193,8 @@ main {
     padding-top: 10px;
 }
 
-.modal-body {
+.modal-body,
+#modal-body__validation {
     padding: 15px 8%;
     margin: 15px auto;
 }
