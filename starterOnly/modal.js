@@ -135,20 +135,20 @@ quantityInput.onchange = function(e) {
 };
 
 //ville
-//city.onchange = function(e) {
-//    let x = document.reserve.location;
-//    for (let i = 0; i < x.length; i++) {
-//        if (x[i].checked) {
-//            missingRadioButtonChecked.innerHTML = ("");
-//            return cityValidated = true;
-//        } else {
-//            missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
-//            missingRadioButtonChecked.style.color = "red";
-//            return cityValidated = false;
-//        }
-//    }
-//};
-
+let cityValidated = false;
+let radios = document.getElementsByName("location");
+radios.forEach(radio => {
+    radio.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!radio.checked) {
+            missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
+            missingRadioButtonChecked.style.color = "red";
+        } else {
+            console.log(cityValidated);
+            return cityValidated = true;
+        }
+    })
+})
 
 //conditions
 let conditionsValidated = true;
@@ -167,25 +167,6 @@ conditions.onchange = function(e) {
 
 formValidator.addEventListener("submit", function(e) {
     e.preventDefault();
-
-    // si tous les champs sont validated, fermeture de la modale
-    ///////// essayer : if ( firstnameValidated & lastNameValidated &......) { submitButton.disabled =false  } 
-
-    //ville
-    let cityValidated = false;
-    let radios = document.getElementsByName("location");
-    let valeur;
-    for (let i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
-            valeur = radios[i].value;
-            console.log(valeur);
-            cityValidated = true
-            break;
-        } else {
-            missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
-            missingRadioButtonChecked.style.color = "red";
-        }
-    }
 
     if (firstInputValidated && secondInputValidated && emailInputValidated &&
         birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
