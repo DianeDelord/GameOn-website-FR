@@ -43,6 +43,7 @@ let birth = document.getElementById("birthdate");
 let quantityInput = document.getElementById("quantity"); //nombre de tournois
 let city = document.getElementsByTagName("location"); //radio button ville https://www.youtube.com/watch?v=MBUc-hfxB2s
 let conditions = document.getElementById("checkbox1"); //conditions d'utilisation
+let radios = document.getElementsByName("location"); //radio buttons pour la ville choisie
 
 // variables pour mettre des messages d'erreur
 let missingTextInputFirst = document.getElementById("validationFieldFirst");
@@ -140,9 +141,8 @@ quantityInput.onchange = function(e) {
 };
 
 //ville
-// vidéos qui m'a permis de trouver la solution!! https://www.youtube.com/watch?v=tWJxQqMYJJE
+// vidéos qui m'a permis de trouver une solution!! https://www.youtube.com/watch?v=tWJxQqMYJJE
 let cityValidated = false;
-let radios = document.getElementsByName("location");
 radios.forEach(radio => {
     radio.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -150,6 +150,7 @@ radios.forEach(radio => {
             missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
             missingRadioButtonChecked.style.color = "red";
         } else {
+            missingRadioButtonChecked.innerHTML = ("");
             console.log(cityValidated);
             return cityValidated = true;
         }
@@ -177,24 +178,18 @@ formValidator.addEventListener("submit", function(e) {
 
     if (firstInputValidated && secondInputValidated && emailInputValidated &&
         birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
-        formValidator.style.display = "none";
-        validationMessage.style.display = "block";
-        validationMessage.addEventListener("click", closeWindow);
-        formValidator.submit();
-        closeForm[0].style.display = "none";
-        modalbg.style.display = "none";
 
-    } else {
-        //alert("merci de vérifier les informations saisies!");
-        //formValidator.style.display = "none";
-        //modalbg.style.display = "none";
-        validationMessage.textContent = 'Merci de vérifier les informations saisies!';
-        validationMessage.style.display = "block";
-        //validationMessage.closest();
-        //formValidator.style.display = "block";
-        //validationMessage.style.display = "none";
+        document.getElementById("reserve").reset();
+        console.log(formValidator);
 
-        //closeForm[0].addEventListener("click", launchModal);
+        formValidator.style.display = "none"; // on ne voit plus le formulaire
+        validationMessage.style.display = "block"; // le message de validation devient visible
+
+    } else if (!document.getElementById('location1').checked && !document.getElementById('location2').checked &&
+        !document.getElementById('location3').checked && !document.getElementById('location4').checked &&
+        !document.getElementById('location5').checked && !document.getElementById('location6').checked) {
+        missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
+        missingRadioButtonChecked.style.color = "red";
     }
 
     console.log(firstInputValidated, secondInputValidated, emailInputValidated,
