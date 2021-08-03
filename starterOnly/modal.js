@@ -73,9 +73,11 @@ firstInput.onchange = function(e) {
         missingTextInputFirst.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
         missingTextInputFirst.style.color = "red";
         firstInputValidated = false;
+        firstInput.style.borderColor = "red";
     } else {
         missingTextInputFirst.innerHTML = "";
         firstInputValidated = true;
+        firstInput.style.borderColor = "#ccc";
     }
     console.log(firstInputValidated);
 };
@@ -88,9 +90,11 @@ secondInput.onchange = function(e) {
         missingTextInputSecond.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
         missingTextInputSecond.style.color = "red";
         secondInputValidated = false;
+        secondInput.style.borderColor = "red";
     } else {
         missingTextInputSecond.innerHTML = "";
         secondInputValidated = true;
+        secondInput.style.borderColor = "#ccc";
     }
     console.log(secondInputValidated);
 };
@@ -103,9 +107,11 @@ emailInput.onchange = function(e) {
         missingEmailInput.innerHTML = "Vous devez saisir une adresse mail valide.";
         missingEmailInput.style.color = "red";
         emailInputValidated = false;
+        emailInput.style.borderColor = "red";
     } else {
         missingEmailInput.innerHTML = "";
         emailInputValidated = true;
+        emailInput.style.borderColor = "#ccc";
     }
     console.log(emailInputValidated);
 };
@@ -118,9 +124,11 @@ birth.onchange = function(e) {
         missingBirthdateInput.innerHTML = "Vous devez saisir votre date de naissance au format jj/mm/aaaa.";
         missingBirthdateInput.style.color = "red";
         birthValidated = false;
+        birth.style.borderColor = "red";
     } else {
         missingBirthdateInput.innerHTML = "";
         birthValidated = true;
+        birth.style.borderColor = "#ccc";
     }
     console.log(birthValidated);
 };
@@ -133,9 +141,11 @@ quantityInput.onchange = function(e) {
         missingQuantityInput.innerHTML = "Vous devez saisir un chiffre.";
         missingQuantityInput.style.color = "red";
         quantityInputValidated = false;
+        quantityInput.style.borderColor = "red";
     } else {
         missingQuantityInput.innerHTML = "";
         quantityInputValidated = true;
+        quantityInput.style.borderColor = "#ccc";
     }
     console.log(quantityInputValidated);
 };
@@ -190,6 +200,10 @@ formValidator.addEventListener("submit", function(e) {
         !document.getElementById('location5').checked && !document.getElementById('location6').checked) {
         missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
         missingRadioButtonChecked.style.color = "red";
+    }
+    if (firstInputValidated = false) {
+        missingTextInputFirst.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
+        missingTextInputFirst.style.color = "red";
     }
 
     console.log(firstInputValidated, secondInputValidated, emailInputValidated,
