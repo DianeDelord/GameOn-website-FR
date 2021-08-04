@@ -58,6 +58,8 @@ let missingConditions = document.getElementById("conditionsValidationField"); //
 let closeForm = document.getElementsByClassName("modal-body");
 let validationMessage = document.getElementById("modal-body__validation");
 validationMessage.style.display = "none";
+let closeFormButton = document.getElementById("modal-body__validation__button");
+closeFormButton.style.display = "none";
 
 // validation des champs grâce à des regEx
 let verifyTextInput = /^[a-zA-Z-\s]{2,}$/;
@@ -71,7 +73,6 @@ firstInput.onchange = function(e) {
     e.preventDefault();
     if ((firstInput.value == "") || (verifyTextInput.test(firstInput.value) == false)) {
         missingTextInputFirst.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
-        missingTextInputFirst.style.color = "red";
         firstInputValidated = false;
         firstInput.style.borderColor = "red";
     } else {
@@ -88,7 +89,6 @@ secondInput.onchange = function(e) {
     e.preventDefault();
     if ((secondInput.value == "") || (verifyTextInput.test(secondInput.value) == false)) {
         missingTextInputSecond.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
-        missingTextInputSecond.style.color = "red";
         secondInputValidated = false;
         secondInput.style.borderColor = "red";
     } else {
@@ -105,7 +105,6 @@ emailInput.onchange = function(e) {
     e.preventDefault();
     if ((emailInput.value == "") || (verifyEmailInput.test(emailInput.value) == false)) {
         missingEmailInput.innerHTML = "Vous devez saisir une adresse mail valide.";
-        missingEmailInput.style.color = "red";
         emailInputValidated = false;
         emailInput.style.borderColor = "red";
     } else {
@@ -122,7 +121,6 @@ birth.onchange = function(e) {
     e.preventDefault();
     if ((birth.value == "") || (verifyDateInput.test(birth.value)) == false) {
         missingBirthdateInput.innerHTML = "Vous devez saisir votre date de naissance au format jj/mm/aaaa.";
-        missingBirthdateInput.style.color = "red";
         birthValidated = false;
         birth.style.borderColor = "red";
     } else {
@@ -139,7 +137,6 @@ quantityInput.onchange = function(e) {
     e.preventDefault();
     if ((quantityInput.value == "") || (verifyNumberInput.test(quantityInput.value)) == false) {
         missingQuantityInput.innerHTML = "Vous devez saisir un chiffre.";
-        missingQuantityInput.style.color = "red";
         quantityInputValidated = false;
         quantityInput.style.borderColor = "red";
     } else {
@@ -158,7 +155,6 @@ radios.forEach(radio => {
         e.stopPropagation();
         if (!radio.checked) {
             missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
-            missingRadioButtonChecked.style.color = "red";
         } else {
             missingRadioButtonChecked.innerHTML = ("");
             console.log(cityValidated);
@@ -176,7 +172,6 @@ conditions.onchange = function(e) {
         return conditionsValidated = true;
     } else {
         missingConditions.innerHTML = ("Vous devez lire et accepter les conditions.");
-        missingConditions.style.color = "red";
         console.log(conditions);
         return conditionsValidated = false;
     }
@@ -189,21 +184,16 @@ formValidator.addEventListener("submit", function(e) {
     if (firstInputValidated && secondInputValidated && emailInputValidated &&
         birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
 
-        document.getElementById("reserve").reset();
+        document.getElementById("reserve").reset(); //réinitialiser le formulaire?
         console.log(formValidator);
 
         formValidator.style.display = "none"; // on ne voit plus le formulaire
         validationMessage.style.display = "block"; // le message de validation devient visible
 
-    } else if (!document.getElementById('location1').checked && !document.getElementById('location2').checked &&
-        !document.getElementById('location3').checked && !document.getElementById('location4').checked &&
-        !document.getElementById('location5').checked && !document.getElementById('location6').checked) {
-        missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
-        missingRadioButtonChecked.style.color = "red";
-    }
-    if (firstInputValidated = false) {
-        missingTextInputFirst.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
-        missingTextInputFirst.style.color = "red";
+        closeFormButton.style.display = "block"; // le bouton close du formulaire validé apparaît
+
+        closeFormButton.addEventListener("click", (closeModal));
+
     }
 
     console.log(firstInputValidated, secondInputValidated, emailInputValidated,
