@@ -90,12 +90,10 @@ main {
     font-size: 130%;
     font-weight: bolder;
     color: black;
-    padding-top: 0.5vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
     margin: 1px 20px 15px;
     border-radius: 2rem;
     text-align: justify;
+    display: flex;
 }
 
 .modal-btn {
@@ -435,23 +433,22 @@ small {
 }
 
 .hero-section {
-    min-height: 93vh;
+    min-height: 80vh;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    /* background-color: #232323; */
     overflow: hidden;
-    box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 7px 2px rgb(0 0 0 / 20%);
     margin-bottom: 10px;
+    flex-direction: row;
+    display: flex;
 }
 
 .hero-content {
-    padding: 51px 67px;
-    grid-column: span 4;
-    background: #232323;
+    padding: 51px 0 0 67px;
+    /* background: #232323; */
     color: #fff;
     position: relative;
     text-align: left;
-    min-width: 424px;
 }
 
 .hero-content::after {
@@ -460,7 +457,7 @@ small {
     height: 100%;
     background: #232323;
     position: absolute;
-    right: -80px;
+    right: 0;
     top: 0;
 }
 
@@ -470,16 +467,16 @@ small {
 }
 
 .hero-headline {
-    font-size: 6rem;
+    font-size: 4em;
     font-weight: normal;
-    white-space: nowrap;
+    display: flex;
+    width: 160%;
 }
 
 .hero-text {
-    width: 146%;
     font-weight: normal;
     margin-top: 57px;
-    padding: 0;
+    padding: 0 15px 0 0;
 }
 
 .btn-signup {
@@ -491,7 +488,7 @@ small {
 }
 
 .hero-img {
-    grid-column: span 8;
+    width: 100%;
 }
 
 .hero-img img {
@@ -594,7 +591,9 @@ footer {
     }
     .hero-headline {
         font-size: 4.5rem;
+        line-height: 1.1em;
         white-space: normal;
+        width: 100%;
     }
     .hero-text {
         width: unset;
@@ -610,20 +609,34 @@ footer {
         margin: 32px auto 10px;
         padding: 12px 35px;
     }
+    .content {
+        margin: 15% auto 0;
+    }
     .copyrights {
         margin-top: 50px;
         text-align: center;
     }
 }
 
-@media screen and (max-width: 365px) {
+@media screen and (max-width: 375px) {
     .hero-headline {
-        font-size: 3.5rem;
+        font-size: 3rem;
+        line-height: 1em;
+    }
+    .hero-text {
+        font-size: 1.25rem;
+    }
+    .content {
+        margin: 17% auto;
     }
 }
 
-@media screen and (max-width: 290px) {
+@media screen and (max-width: 320px) {
     .hero-headline {
-        font-size: 3rem;
+        font-size: 2.4rem;
+    }
+    .hero-text {
+        width: unset;
+        font-size: 1.15rem;
     }
 }
