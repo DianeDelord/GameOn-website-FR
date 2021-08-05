@@ -18,6 +18,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
     modalbg.style.display = "block";
+    formValidator.style.display = "block";
+    validationMessage.style.display = "none";
+    closeFormButton.style.display = "none";
 }
 
 // fermeture de la fenêtre formulaire
@@ -29,7 +32,7 @@ function closeModal() {
 }
 
 //////////////////////////////////////
-// vérification du formulaire //
+//// vérification du formulaire /////
 //////////////////////////////////////
 
 // l'id du formulaire pour vérifier la validation au submit 
@@ -67,6 +70,10 @@ let verifyEmailInput = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-z
 let verifyNumberInput = /^[0-9]{1,2}$/; // validation du nombre de tournois
 let verifyDateInput = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
+// je désactive le bouton de soumission en attendant que le formulaire soit rempli corectement
+let buttoned = document.getElementsByTagName("button")[2];
+buttoned.disabled = true;
+
 //prénom
 let firstInputValidated = false;
 firstInput.onchange = function(e) {
@@ -80,7 +87,7 @@ firstInput.onchange = function(e) {
         firstInputValidated = true;
         firstInput.style.borderColor = "#ccc";
     }
-    console.log(firstInputValidated);
+    console.log("champs prénom " + firstInputValidated);
 };
 
 //nom
@@ -96,7 +103,7 @@ secondInput.onchange = function(e) {
         secondInputValidated = true;
         secondInput.style.borderColor = "#ccc";
     }
-    console.log(secondInputValidated);
+    console.log("champs nom " + secondInputValidated);
 };
 
 //email
@@ -112,7 +119,7 @@ emailInput.onchange = function(e) {
         emailInputValidated = true;
         emailInput.style.borderColor = "#ccc";
     }
-    console.log(emailInputValidated);
+    console.log("champs email " + emailInputValidated);
 };
 
 //date naissance
@@ -128,7 +135,7 @@ birth.onchange = function(e) {
         birthValidated = true;
         birth.style.borderColor = "#ccc";
     }
-    console.log(birthValidated);
+    console.log("champs date de naissance " + birthValidated);
 };
 
 //nombre tournois
@@ -144,12 +151,13 @@ quantityInput.onchange = function(e) {
         quantityInputValidated = true;
         quantityInput.style.borderColor = "#ccc";
     }
-    console.log(quantityInputValidated);
+    console.log("champs nombre de tournois " + quantityInputValidated);
 };
 
 //ville
 // vidéos qui m'a permis de trouver une solution!! https://www.youtube.com/watch?v=tWJxQqMYJJE
 let cityValidated = false;
+
 radios.forEach(radio => {
     radio.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -157,7 +165,6 @@ radios.forEach(radio => {
             missingRadioButtonChecked.innerHTML = ("merci de choisir une ville");
         } else {
             missingRadioButtonChecked.innerHTML = ("");
-            console.log(cityValidated);
             return cityValidated = true;
         }
     })
@@ -165,37 +172,53 @@ radios.forEach(radio => {
 
 //conditions
 let conditionsValidated = true;
+
 conditions.onchange = function(e) {
     if (conditions.checked) {
         missingConditions.innerHTML = ("");
-        console.log(conditions);
+        console.log("champs conditions " + conditionsValidated);
         return conditionsValidated = true;
     } else {
         missingConditions.innerHTML = ("Vous devez lire et accepter les conditions.");
-        console.log(conditions);
+        console.log("champs conditions " + conditionsValidated);
         return conditionsValidated = false;
     }
 };
 
+// je réactive le bouton quand les inputs sont ok
+if (firstInputValidated && secondInputValidated && emailInputValidated &&
+    birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
+    buttoned.disabled = false;
+    console.log(buttoned);
+};
+
 // validation du formulaire au click sur bouton submit
+// et quand le bouton a été enabled
 formValidator.addEventListener("submit", function(e) {
     e.preventDefault();
 
     if (firstInputValidated && secondInputValidated && emailInputValidated &&
         birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
 
+        console.log("formulaire : tout est ok");
         document.getElementById("reserve").reset(); //réinitialiser le formulaire?
         console.log(formValidator);
 
         formValidator.style.display = "none"; // on ne voit plus le formulaire
         validationMessage.style.display = "block"; // le message de validation devient visible
-
         closeFormButton.style.display = "block"; // le bouton close du formulaire validé apparaît
 
         closeFormButton.addEventListener("click", (closeModal));
-
+        firstInputValidated = false; // réinitialisation de la validation des variables
+        secondInputValidated = false;
+        emailInputValidated = false;
+        birthValidated = false;
+        quantityInputValidated = false;
+        cityValidated = false;
+    } else {
+        console.log("badaboom");
     }
-
-    console.log(firstInputValidated, secondInputValidated, emailInputValidated,
-        birthValidated, quantityInputValidated, cityValidated, conditionsValidated);
 });
+
+let inputAll = document.getElementsByTagName("input");
+console.log(inputAll);

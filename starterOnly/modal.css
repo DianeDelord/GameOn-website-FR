@@ -73,6 +73,7 @@ img {
     background-color: #ff0000;
     color: #ffffff;
     border-radius: 15px;
+    padding: 12px 12px;
 }
 
 .topnav a.active {
@@ -344,6 +345,10 @@ small {
     color: #fff;
     cursor: pointer;
     border: 0;
+}
+
+.btn-submit:disabled {
+    display: none;
 }
 
 
