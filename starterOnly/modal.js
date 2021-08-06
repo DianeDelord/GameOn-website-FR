@@ -86,6 +86,8 @@ firstInput.onchange = function(e) {
         missingTextInputFirst.innerHTML = "";
         firstInputValidated = true;
         firstInput.style.borderColor = "#ccc";
+        valider();
+        console.log("coucou prénom ");
     }
     console.log("champs prénom " + firstInputValidated);
 };
@@ -102,6 +104,8 @@ secondInput.onchange = function(e) {
         missingTextInputSecond.innerHTML = "";
         secondInputValidated = true;
         secondInput.style.borderColor = "#ccc";
+        valider();
+        console.log("coucou nom ");
     }
     console.log("champs nom " + secondInputValidated);
 };
@@ -118,6 +122,8 @@ emailInput.onchange = function(e) {
         missingEmailInput.innerHTML = "";
         emailInputValidated = true;
         emailInput.style.borderColor = "#ccc";
+        valider();
+        console.log("coucou email ");
     }
     console.log("champs email " + emailInputValidated);
 };
@@ -134,6 +140,8 @@ birth.onchange = function(e) {
         missingBirthdateInput.innerHTML = "";
         birthValidated = true;
         birth.style.borderColor = "#ccc";
+        valider();
+        console.log("coucou naissance ");
     }
     console.log("champs date de naissance " + birthValidated);
 };
@@ -150,6 +158,8 @@ quantityInput.onchange = function(e) {
         missingQuantityInput.innerHTML = "";
         quantityInputValidated = true;
         quantityInput.style.borderColor = "#ccc";
+        valider();
+        console.log("coucou nombre ");
     }
     console.log("champs nombre de tournois " + quantityInputValidated);
 };
@@ -170,28 +180,30 @@ radios.forEach(radio => {
     })
 })
 
+radios[0].onclick = valider;
+radios[1].onclick = valider;
+radios[2].onclick = valider;
+radios[3].onclick = valider;
+radios[4].onclick = valider;
+radios[5].onclick = valider;
+console.log("champs ville " + cityValidated);
+
+
 //conditions
 let conditionsValidated = true;
 
 conditions.onchange = function(e) {
     if (conditions.checked) {
         missingConditions.innerHTML = ("");
-        console.log("champs conditions " + conditionsValidated);
+        valider;
         return conditionsValidated = true;
     } else {
         missingConditions.innerHTML = ("Vous devez lire et accepter les conditions.");
-        console.log("champs conditions " + conditionsValidated);
         return conditionsValidated = false;
     }
 };
 
 // je réactive le bouton quand les inputs sont ok
-if (firstInputValidated && secondInputValidated && emailInputValidated &&
-    birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
-    buttoned.disabled = false;
-    console.log(buttoned);
-};
-
 // validation du formulaire au click sur bouton submit
 // et quand le bouton a été enabled
 formValidator.addEventListener("submit", function(e) {
@@ -215,10 +227,21 @@ formValidator.addEventListener("submit", function(e) {
         birthValidated = false;
         quantityInputValidated = false;
         cityValidated = false;
-    } else {
-        console.log("badaboom");
     }
 });
 
-let inputAll = document.getElementsByTagName("input");
-console.log(inputAll);
+var myArray = [firstInputValidated, secondInputValidated, emailInputValidated,
+    birthValidated, quantityInputValidated
+];
+
+function valider() {
+    for (var i = 0; i < (myArray.length - 1); i++) {
+        if (firstInputValidated && secondInputValidated && emailInputValidated &&
+            birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
+            buttoned.disabled = false;
+        } else if ((myArray[i]).value == false) {
+            console.log((myArray[i]));
+            buttoned.disabled = true;
+        }
+    }
+}
