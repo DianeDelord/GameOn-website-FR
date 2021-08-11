@@ -194,7 +194,7 @@ input {
 }
 
 input:focus-within {
-    border-color: red;
+    border-color: #e54858;
 }
 
 .text-control {
@@ -208,7 +208,7 @@ input:focus-within {
 
 small {
     font-size: 11px;
-    color: red;
+    color: #e54858;
 }
 
 .formData[data-error]::after {

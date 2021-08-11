@@ -81,13 +81,12 @@ firstInput.onchange = function(e) {
     if ((firstInput.value == "") || (verifyTextInput.test(firstInput.value) == false)) {
         missingTextInputFirst.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
         firstInputValidated = false;
-        firstInput.style.borderColor = "red";
+        firstInput.style.borderColor = "#fe142f";
     } else {
         missingTextInputFirst.innerHTML = "";
         firstInputValidated = true;
         firstInput.style.borderColor = "#ccc";
         valider();
-        console.log("coucou prénom ");
     }
     console.log("champs prénom " + firstInputValidated);
 };
@@ -99,13 +98,12 @@ secondInput.onchange = function(e) {
     if ((secondInput.value == "") || (verifyTextInput.test(secondInput.value) == false)) {
         missingTextInputSecond.innerHTML = "Vous devez saisir au moins deux caractères, les chiffres et caractères spéciaux ne sont pas acceptés.";
         secondInputValidated = false;
-        secondInput.style.borderColor = "red";
+        secondInput.style.borderColor = "#fe142f";
     } else {
         missingTextInputSecond.innerHTML = "";
         secondInputValidated = true;
         secondInput.style.borderColor = "#ccc";
         valider();
-        console.log("coucou nom ");
     }
     console.log("champs nom " + secondInputValidated);
 };
@@ -117,13 +115,12 @@ emailInput.onchange = function(e) {
     if ((emailInput.value == "") || (verifyEmailInput.test(emailInput.value) == false)) {
         missingEmailInput.innerHTML = "Vous devez saisir une adresse mail valide.";
         emailInputValidated = false;
-        emailInput.style.borderColor = "red";
+        emailInput.style.borderColor = "#fe142f";
     } else {
         missingEmailInput.innerHTML = "";
         emailInputValidated = true;
         emailInput.style.borderColor = "#ccc";
         valider();
-        console.log("coucou email ");
     }
     console.log("champs email " + emailInputValidated);
 };
@@ -135,13 +132,12 @@ birth.onchange = function(e) {
     if ((birth.value == "") || (verifyDateInput.test(birth.value)) == false) {
         missingBirthdateInput.innerHTML = "Vous devez saisir votre date de naissance au format jj/mm/aaaa.";
         birthValidated = false;
-        birth.style.borderColor = "red";
+        birth.style.borderColor = "#fe142f";
     } else {
         missingBirthdateInput.innerHTML = "";
         birthValidated = true;
         birth.style.borderColor = "#ccc";
         valider();
-        console.log("coucou naissance ");
     }
     console.log("champs date de naissance " + birthValidated);
 };
@@ -153,13 +149,12 @@ quantityInput.onchange = function(e) {
     if ((quantityInput.value == "") || (verifyNumberInput.test(quantityInput.value)) == false) {
         missingQuantityInput.innerHTML = "Vous devez saisir un chiffre.";
         quantityInputValidated = false;
-        quantityInput.style.borderColor = "red";
+        quantityInput.style.borderColor = "#fe142f";
     } else {
         missingQuantityInput.innerHTML = "";
         quantityInputValidated = true;
         quantityInput.style.borderColor = "#ccc";
         valider();
-        console.log("coucou nombre ");
     }
     console.log("champs nombre de tournois " + quantityInputValidated);
 };
@@ -193,22 +188,6 @@ console.log("champs ville " + cityValidated);
 let conditionsValidated = true;
 console.log("conditions " + conditionsValidated);
 
-//conditions.onchange = function(e) {
-//   console.log("coucou conditions ");
-//    if (conditions.checked) {
-//        conditionsValidated = true;
-//        missingConditions.innerHTML = ("");
-//        console.log("conditions " + conditionsValidated);
-//       valider;
-//       return conditionsValidated = true;
-///   } else {
-//       conditionsValidated = false;
-//       console.log("conditions " + conditionsValidated);
-//       missingConditions.innerHTML = ("Vous devez lire et accepter les conditions.");
-//       return conditionsValidated = false;
-//   }
-//};
-
 conditions.addEventListener('click', (e) => {
     if (!conditions.checked) {
         conditionsValidated = false;
@@ -219,19 +198,16 @@ conditions.addEventListener('click', (e) => {
         conditionsValidated = true;
         missingConditions.innerHTML = ("");
         console.log("conditions " + conditionsValidated);
+        valider();
         return conditionsValidated = true;
     }
 })
-
-
 console.log("conditions " + conditionsValidated);
 
 // je stocke le résultat de la validation de champs dans un tableau
 var myArray = [firstInputValidated, secondInputValidated, emailInputValidated, birthValidated, quantityInputValidated, conditionsValidated];
 console.log("tableau vérif " +
     firstInputValidated, secondInputValidated, emailInputValidated, birthValidated, quantityInputValidated, conditionsValidated);
-
-
 
 // fonction qui parcourt le tableau préalablement rempli contenant le résultat de la validation des champs
 // si les champs sont valides, le bouton d'envoi est visible (disabled = false), 
@@ -247,6 +223,8 @@ function valider() {
             buttoned.disabled = true;
         }
     }
+    console.log("tableau vérif " +
+        firstInputValidated, secondInputValidated, emailInputValidated, birthValidated, quantityInputValidated, conditionsValidated);
 }
 
 // je réactive le bouton d'envoi quand les inputs sont ok
