@@ -250,5 +250,6 @@ formValidator.addEventListener("submit", function(e) {
         birthValidated = false;
         quantityInputValidated = false;
         cityValidated = false;
+        buttoned.disabled = true;
     }
 });
