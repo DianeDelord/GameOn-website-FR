@@ -191,21 +191,66 @@ console.log("champs ville " + cityValidated);
 
 //conditions
 let conditionsValidated = true;
+console.log("conditions " + conditionsValidated);
 
-conditions.onchange = function(e) {
-    if (conditions.checked) {
-        missingConditions.innerHTML = ("");
-        valider;
-        return conditionsValidated = true;
-    } else {
+//conditions.onchange = function(e) {
+//   console.log("coucou conditions ");
+//    if (conditions.checked) {
+//        conditionsValidated = true;
+//        missingConditions.innerHTML = ("");
+//        console.log("conditions " + conditionsValidated);
+//       valider;
+//       return conditionsValidated = true;
+///   } else {
+//       conditionsValidated = false;
+//       console.log("conditions " + conditionsValidated);
+//       missingConditions.innerHTML = ("Vous devez lire et accepter les conditions.");
+//       return conditionsValidated = false;
+//   }
+//};
+
+conditions.addEventListener('click', (e) => {
+    if (!conditions.checked) {
+        conditionsValidated = false;
         missingConditions.innerHTML = ("Vous devez lire et accepter les conditions.");
+        console.log("conditions " + conditionsValidated);
         return conditionsValidated = false;
+    } else {
+        conditionsValidated = true;
+        missingConditions.innerHTML = ("");
+        console.log("conditions " + conditionsValidated);
+        return conditionsValidated = true;
     }
-};
+})
 
-// je réactive le bouton quand les inputs sont ok
+
+console.log("conditions " + conditionsValidated);
+
+// je stocke le résultat de la validation de champs dans un tableau
+var myArray = [firstInputValidated, secondInputValidated, emailInputValidated, birthValidated, quantityInputValidated, conditionsValidated];
+console.log("tableau vérif " +
+    firstInputValidated, secondInputValidated, emailInputValidated, birthValidated, quantityInputValidated, conditionsValidated);
+
+
+
+// fonction qui parcourt le tableau préalablement rempli contenant le résultat de la validation des champs
+// si les champs sont valides, le bouton d'envoi est visible (disabled = false), 
+// sinon il reste désactivé
+// source https://stackoverflow.com/questions/11719961/javascript-remove-disabled-attribute-from-html-input
+function valider() {
+    for (var i = 0; i < (myArray.length - 1); i++) {
+        if (firstInputValidated && secondInputValidated && emailInputValidated &&
+            birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
+            buttoned.disabled = false;
+        } else if ((myArray[i]).value == false) {
+            console.log((myArray[i]));
+            buttoned.disabled = true;
+        }
+    }
+}
+
+// je réactive le bouton d'envoi quand les inputs sont ok
 // validation du formulaire au click sur bouton submit
-// et quand le bouton a été enabled
 formValidator.addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -229,19 +274,3 @@ formValidator.addEventListener("submit", function(e) {
         cityValidated = false;
     }
 });
-
-var myArray = [firstInputValidated, secondInputValidated, emailInputValidated,
-    birthValidated, quantityInputValidated
-];
-
-function valider() {
-    for (var i = 0; i < (myArray.length - 1); i++) {
-        if (firstInputValidated && secondInputValidated && emailInputValidated &&
-            birthValidated && quantityInputValidated && cityValidated && conditionsValidated) {
-            buttoned.disabled = false;
-        } else if ((myArray[i]).value == false) {
-            console.log((myArray[i]));
-            buttoned.disabled = true;
-        }
-    }
-}

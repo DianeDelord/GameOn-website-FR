@@ -532,6 +532,21 @@ footer {
     }
 }
 
+@media screen and (min-width: 801px) and (max-width: 1059px) {
+    .topnav {
+        flex-direction: column;
+    }
+    .topnav a:not(:nth-child(1)) {
+        display: flex;
+    }
+    .topnav a:not(:nth-child(6)) {
+        display: flex;
+    }
+    .main-navbar {
+        justify-content: space-between;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .topnav {
         display: flex;
